@@ -33,7 +33,11 @@ on post-fs
     wait_for_prop vendor.sys.listeners.registered true
 
 on boot
-	# Set permission for double tap to wake support
+    # GPU boost
+    chown system system /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+    chmod 0660 /sys/class/kgsl/kgsl-3d0/min_pwrlevel
+   
+    # Set permission for double tap to wake support
     chmod 0660 /sys/touchpanel/double_tap
     chown system system /sys/touchpanel/double_tap
 
