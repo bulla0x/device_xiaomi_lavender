@@ -41,6 +41,7 @@ persist.vendor.ims.disableUserAgent=0
 # LMKD
 ro.lmk.log_stats=false
 ro.lmk.downgrade_pressure=60
+ro.lmk.filecache_min_kb=153600
 ro.lmk.kill_timeout_ms=100
 ro.lmk.lowmem_min_oom_score=801
 ro.lmk.psi_complete_stall_ms=150
