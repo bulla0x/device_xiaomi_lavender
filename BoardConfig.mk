@@ -65,6 +65,7 @@ $(call project-set-path,qcom-camera,hardware/qcom-caf/sdm660/camera)
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config.fs
 
 # Display
+TARGET_NEEDS_RAW10_BUFFER_FIX := true
 TARGET_SCREEN_DENSITY := 420
 
 # DT2W
