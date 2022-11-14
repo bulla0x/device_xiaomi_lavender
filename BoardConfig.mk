@@ -116,6 +116,7 @@ TARGET_KERNEL_VERSION := 4.19
 TARGET_KERNEL_CONFIG := lavender_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/lavender
 TARGET_COMPILE_WITH_MSM_KERNEL := true
+TARGET_KERNEL_NO_GCC := true
 BOARD_RAMDISK_USE_LZ4 := true
 
 # Enable stats logging in LMKD
