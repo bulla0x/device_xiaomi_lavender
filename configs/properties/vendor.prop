@@ -132,6 +132,7 @@ debug.gralloc.enable_fb_ubwc=1
 debug.sf.treat_170m_as_sRGB=1
 debug.renderengine.blur_algorithm=kawase2
 debug.sf.predict_hwc_composition_strategy=0
+debug.sf.layer_caching_active_layer_timeout_ms=1000
 dev.pm.dyn_samplingrate=1
 ro.vendor.display.cabl=2
 vendor.display.disable_skip_validate=1
