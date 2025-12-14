@@ -1,0 +1,5 @@
+runtime_resource_overlay {
+    name: "LavenderLauncherOverlay",
+    theme: "LavenderLauncherOverlay",
+    product_specific: true,
+}
