@@ -129,6 +129,10 @@ blob_fixups: blob_fixups_user_type = {
     ('vendor/lib64/libvendor.goodix.hardware.interfaces.biometrics.fingerprint@2.1.so', 'vendor/lib64/hw/fingerprint.fpc.default.so', 'vendor.qti.hardware.fingerprint@1.0.so'): blob_fixup()
         .remove_needed('libhidltransport.so')
         .replace_needed('libhidlbase.so', 'libhidlbase-v32.so'),
+    ('vendor/lib64/hw/camera.qcom.so', 'vendor/lib64/libFaceDetectpp-0.5.2.so', 'vendor/lib64/libfacedet.so'): blob_fixup()
+        .binary_regex_replace(b'libmegface.so', b'libfacedet.so')
+        .binary_regex_replace(b'libMegviiFacepp-0.5.2.so', b'libFaceDetectpp-0.5.2.so')
+        .binary_regex_replace(b'megviifacepp_0_5_2_model', b'facedetectpp_0_5_2_model'),
     'vendor/lib/libmmcamera_faceproc.so': blob_fixup()
         .clear_symbol_version('__aeabi_memcpy')
         .clear_symbol_version('__aeabi_memset')
