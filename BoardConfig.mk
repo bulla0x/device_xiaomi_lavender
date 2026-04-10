@@ -148,6 +148,9 @@ BOARD_SUPER_PARTITION_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SYSTEM_DEVICE
 BOARD_XIAOMI_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304 )
 
 # Reserve Partition
+ifneq ($(WITH_GMS), true)
+-include vendor/lineage/config/BoardConfigReservedSize.mk
+endif
 BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 100000000
 
 # Platform
