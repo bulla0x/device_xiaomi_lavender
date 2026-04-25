@@ -74,6 +74,8 @@ PRODUCT_PACKAGES += \
     android.hardware.camera.provider-service_32.lineage \
     camera.sdm660
 
+$(call soong_config_set,libcameraservice,ext_lib,//$(LOCAL_PATH):libcameraservice_extension.lavender)
+
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-4096-dalvik-heap.mk )
 
