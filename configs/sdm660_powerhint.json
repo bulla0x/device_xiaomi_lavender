@@ -228,7 +228,7 @@
     {
       "PowerHint": "INTERACTION",
       "Node": "CPUBWHystTriggerCount",
-      "Duration": 400,
+      "Duration": 800,
       "Value": "0"
     },
     {
