@@ -72,7 +72,8 @@ TARGET_SCREEN_WIDTH := 1080
 # Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider-service_32.lineage \
-    camera.sdm660
+    camera.sdm660 \
+    GCamGOPrebuilt
 
 $(call soong_config_set,libcameraservice,ext_lib,//$(LOCAL_PATH):libcameraservice_extension.lavender)
 
