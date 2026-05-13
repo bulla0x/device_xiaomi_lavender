@@ -86,7 +86,7 @@ PRODUCT_PACKAGES += \
 
 # ConsumerIR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.lavender
+    android.hardware.ir-service.lineage.lavender
 
 BOARD_HAVE_IR := true
 
