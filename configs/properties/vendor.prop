@@ -132,6 +132,7 @@ drm.service.enabled=true
 # Display
 debug.gralloc.enable_fb_ubwc=1
 debug.sf.treat_170m_as_sRGB=1
+debug.renderengine.blur_algorithm=kawase2
 debug.sf.predict_hwc_composition_strategy=0
 ro.surface_flinger.game_default_frame_rate_override=120
 dev.pm.dyn_samplingrate=1
