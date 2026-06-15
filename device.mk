@@ -86,7 +86,7 @@ PRODUCT_PACKAGES += \
 
 # ConsumerIR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.xiaomi_sdm660
+    android.hardware.ir@1.0-service.lavender
 
 BOARD_HAVE_IR := true
 
