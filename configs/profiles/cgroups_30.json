@@ -1,12 +1,18 @@
 {
   "Cgroups": [
     {
-      "Controller": "schedtune",
-      "Path": "/dev/stune",
+      "Controller": "blkio",
+      "Path": "/dev/blkio",
+      "Mode": "0775",
+      "UID": "system",
+      "GID": "system"
+    },
+    {
+      "Controller": "cpu",
+      "Path": "/dev/cpuctl",
       "Mode": "0755",
       "UID": "system",
-      "GID": "system",
-      "Optional": true
+      "GID": "system"
     },
     {
       "Controller": "cpuset",
@@ -15,5 +21,24 @@
       "UID": "system",
       "GID": "system"
     }
-  ]
+  ],
+  "Cgroups2": {
+    "Path": "/sys/fs/cgroup",
+    "Mode": "0775",
+    "UID": "system",
+    "GID": "system",
+    "Controllers": [
+      {
+        "Controller": "freezer",
+        "Path": "."
+      },
+      {
+        "Controller": "memory",
+        "Path": ".",
+        "NeedsActivation": true,
+        "MaxActivationDepth": 3,
+        "Optional": true
+      }
+    ]
+  }
 }
