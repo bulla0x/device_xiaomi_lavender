@@ -21,6 +21,24 @@
       "ResetOnInit": true
     },
     {
+      "Name": "CPULittleClusterUpRateLimit",
+      "Path": "/sys/devices/system/cpu/cpu0/cpufreq/schedutil/up_rate_limit_us",
+      "Values": [
+        "500",
+        "2000"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "CPULittleClusterDownRateLimit",
+      "Path": "/sys/devices/system/cpu/cpu0/cpufreq/schedutil/down_rate_limit_us",
+      "Values": [
+        "20000",
+        "2000"
+      ],
+      "ResetOnInit": true
+    },
+    {
       "Name": "CPUBigClusterMaxFreq",
       "Path": "/sys/devices/system/cpu/cpu4/cpufreq/scaling_max_freq",
       "Values": [
@@ -40,6 +58,24 @@
       "ResetOnInit": true
     },
     {
+      "Name": "CPUBigClusterUpRateLimit",
+      "Path": "/sys/devices/system/cpu/cpu4/cpufreq/schedutil/up_rate_limit_us",
+      "Values": [
+        "500",
+        "2000"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "CPUBigClusterDownRateLimit",
+      "Path": "/sys/devices/system/cpu/cpu4/cpufreq/schedutil/down_rate_limit_us",
+      "Values": [
+        "10000",
+        "2000"
+      ],
+      "ResetOnInit": true
+    },
+    {
       "Name": "GPUMaxFreq",
       "Path": "/sys/class/kgsl/kgsl-3d0/devfreq/max_freq",
       "Values": [
@@ -55,9 +91,11 @@
       "Values": [
         "647000000",
         "465000000",
-        "266000000"
+        "266000000",
+        "160000000"
       ],
-      "ResetOnInit": true
+      "ResetOnInit": true,
+      "DefaultIndex": 3
     },
     {
       "Name": "GPUForceRailOn",
@@ -81,8 +119,17 @@
       "Name": "GPUIdleTimer",
       "Path": "/sys/class/kgsl/kgsl-3d0/idle_timer",
       "Values": [
-        "5000",
+        "10000",
         "64"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "SchedBoost",
+      "Path": "/proc/sys/kernel/sched_boost",
+      "Values": [
+        "1",
+        "0"
       ],
       "ResetOnInit": true
     },
@@ -105,29 +152,11 @@
       "ResetOnInit": true
     },
     {
-      "Name": "UClampForegroundBoost",
-      "Path": "/dev/cpuctl/foreground/cpu.uclamp.min",
+      "Name": "KernelBatterySaver",
+      "Path": "/sys/module/battery_saver/parameters/enabled",
       "Values": [
-        "30",
-        "0"
-      ],
-      "ResetOnInit": true
-    },
-    {
-      "Name": "UClampTopAppBoost",
-      "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
-      "Values": [
-        "65",
-        "0"
-      ],
-      "ResetOnInit": true
-    },
-    {
-      "Name": "UclampTALatency",
-      "Path": "/dev/cpuctl/top-app/cpu.uclamp.latency_sensitive",
-      "Values": [
-        "0",
-        "1"
+        "Y",
+        "N"
       ],
       "ResetOnInit": true
     },
@@ -158,6 +187,179 @@
       ],
       "DefaultIndex": 0,
       "ResetOnInit": true
+    },
+    {
+      "Name": "UclampTAMin",
+      "Path": "/dev/cpuctl/top-app/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "65",
+        "78",
+        "100"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampTAMax",
+      "Path": "/dev/cpuctl/top-app/cpu.uclamp.max",
+      "Values": [
+        "100",
+        "60"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampTALatency",
+      "Path": "/dev/cpuctl/top-app/cpu.uclamp.latency_sensitive",
+      "Values": [
+        "0",
+        "1"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampFgMin",
+      "Path": "/dev/cpuctl/foreground/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "25",
+        "60"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampFgWinMin",
+      "Path": "/dev/cpuctl/foreground_window/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "25",
+        "60"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampSysMin",
+      "Path": "/dev/cpuctl/system/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "30",
+        "100"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampNnapiMin",
+      "Path": "/dev/cpuctl/nnapi-hal/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "80"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampDex2oatMax",
+      "Path": "/dev/cpuctl/dex2oat/cpu.uclamp.max",
+      "Values": [
+        "60",
+        "max"
+      ],
+      "DefaultIndex": 1,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampCDMin",
+      "Path": "/dev/cpuctl/camera-daemon/cpu.uclamp.min",
+      "Values": [
+        "0",
+        "100"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "UclampBgMax",
+      "Path": "/dev/cpuctl/background/cpu.uclamp.max",
+      "Values": [
+        "30",
+        "60"
+      ],
+      "DefaultIndex": 1,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "PMQoSCpuDmaLatency",
+      "Path": "/dev/cpu_dma_latency",
+      "Values": [
+        "44",
+        "64"
+      ],
+      "HoldFd": true
+    },
+    {
+      "Name": "PowerHALAudioState",
+      "Path": "vendor.powerhal.audio",
+      "Values": [
+        "AUDIO_STREAMING_LOW_LATENCY",
+        ""
+      ],
+      "Type": "Property"
+    },
+    {
+      "Name": "DisplayWakeup",
+      "Path": "/sys/devices/platform/soc/c900000.qcom,mdss_mdp/drm/card0/sde-crtc-0/early_wakeup",
+      "Values": [
+        "1",
+        "0"
+      ],
+      "DefaultIndex": 1,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "CPUBWGovernor",
+      "Path": "/sys/class/devfreq/soc:qcom,cpu-cpu-ddr-bw/governor",
+      "Values": [
+        "performance",
+        "bw_hwmon"
+      ],
+      "ResetOnInit": true
+    },
+    {
+      "Name": "CPUBWMinFreq",
+      "Path": "/sys/class/devfreq/soc:qcom,cpu-cpu-ddr-bw/min_freq",
+      "Values": [
+        "6881",
+        "5931",
+        "5161",
+        "4943",
+        "3879",
+        "2929",
+        "2597",
+        "2086",
+        "1571",
+        "1144",
+        "762",
+        "572",
+        "381"
+      ],
+      "DefaultIndex": 6,
+      "ResetOnInit": true
+    },
+    {
+      "Name": "SYSTEM_UI_ADPF_PROFILES",
+      "Path": "<AdpfConfig>:SYSTEM_UI",
+      "Values": [
+        "SYSTEM_UI_PROFILE",
+        "DEFAULT"
+      ],
+      "DefaultIndex": 0,
+      "ResetOnInit": true,
+      "Type": "Event"
     }
   ],
   "Actions": [
@@ -204,81 +406,57 @@
       "Value": "0"
     },
     {
-      "PowerHint": "INTERACTION",
-      "Node": "UClampTopAppBoost",
-      "Duration": 1200,
-      "Value": "65"
-    },
-    {
-      "PowerHint": "INTERACTION",
-      "Node": "UclampTALatency",
-      "Duration": 0,
-      "Value": "1"
-    },
-    {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMaxFreq",
-      "Duration": 6000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBigClusterMinFreq",
-      "Duration": 6000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPULittleClusterMinFreq",
-      "Duration": 6000,
+      "Duration": 3000,
       "Value": "9999999"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBWHystTriggerCount",
-      "Duration": 6000,
+      "Duration": 3000,
       "Value": "0"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "CPUBWHistMemory",
-      "Duration": 6000,
+      "Duration": 3000,
       "Value": "0"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUForceClkOn",
-      "Duration": 6000,
+      "Duration": 3000,
       "Value": "1"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUForceRailOn",
-      "Duration": 6000,
+      "Duration": 3000,
       "Value": "1"
     },
     {
       "PowerHint": "LAUNCH",
       "Node": "GPUIdleTimer",
-      "Duration": 6000,
-      "Value": "5000"
+      "Duration": 3000,
+      "Value": "10000"
     },
     {
       "PowerHint": "LAUNCH",
-      "Node": "UClampForegroundBoost",
-      "Duration": 6000,
-      "Value": "30"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "UClampTopAppBoost",
-      "Duration": 6000,
-      "Value": "65"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "UclampTALatency",
-      "Duration": 5000,
+      "Node": "SchedBoost",
+      "Duration": 3000,
       "Value": "1"
     },
     {
@@ -300,10 +478,362 @@
       "Value": "647000000"
     },
     {
+      "PowerHint": "INTERACTIVE",
+      "Node": "CPULittleClusterUpRateLimit",
+      "Duration": 0,
+      "Value": "500"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "CPULittleClusterDownRateLimit",
+      "Duration": 0,
+      "Value": "20000"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "CPUBigClusterUpRateLimit",
+      "Duration": 0,
+      "Value": "500"
+    },
+    {
+      "PowerHint": "INTERACTIVE",
+      "Node": "CPUBigClusterDownRateLimit",
+      "Duration": 0,
+      "Value": "10000"
+    },
+    {
+      "PowerHint": "LOW_POWER",
+      "Node": "KernelBatterySaver",
+      "Duration": 0,
+      "Value": "Y"
+    },
+    {
       "PowerHint": "DOUBLE_TAP_TO_WAKE",
       "Node": "DoubleTapToWake",
       "Duration": 0,
       "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampTAMin",
+      "Duration": 3000,
+      "Value": "65"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampTALatency",
+      "Duration": 3000,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampFgMin",
+      "Duration": 3000,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampFgWinMin",
+      "Duration": 3000,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampSysMin",
+      "Duration": 3000,
+      "Value": "100"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "UclampDex2oatMax",
+      "Duration": 3000,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "UclampTAMin",
+      "Duration": 0,
+      "Value": "78"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "UclampTALatency",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "UclampFgMin",
+      "Duration": 0,
+      "Value": "25"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "UclampFgWinMin",
+      "Duration": 0,
+      "Value": "25"
+    },
+    {
+      "PowerHint": "INTERACTION",
+      "Node": "UclampSysMin",
+      "Duration": 0,
+      "Value": "30"
+    },
+    {
+      "PowerHint": "GAME",
+      "Node": "UclampTALatency",
+      "Duration": 0,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "SUSTAINED_PERFORMANCE",
+      "Node": "UclampTAMax",
+      "Duration": 0,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "LOW_POWER",
+      "Node": "UclampTAMax",
+      "Duration": 0,
+      "Value": "60"
+    },
+    {
+      "PowerHint": "ML_ACC",
+      "Node": "UclampNnapiMin",
+      "Duration": 2000,
+      "Value": "80"
+    },
+    {
+      "PowerHint": "ML_ACC",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 2000,
+      "Value": "44"
+    },
+    {
+      "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
+      "Node": "PowerHALAudioState",
+      "Duration": 0,
+      "Value": "AUDIO_STREAMING_LOW_LATENCY"
+    },
+    {
+      "PowerHint": "AUDIO_STREAMING_LOW_LATENCY",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 0,
+      "Value": "44"
+    },
+    {
+      "PowerHint": "AUDIO_LAUNCH",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 2000,
+      "Value": "44"
+    },
+    {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Node": "DisplayWakeup",
+      "Duration": 60,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 60,
+      "Value": "44"
+    },
+    {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Node": "UclampTAMin",
+      "Duration": 50,
+      "Value": "65"
+    },
+    {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Node": "UclampFgMin",
+      "Duration": 50,
+      "Value": "25"
+    },
+    {
+      "PowerHint": "DISPLAY_UPDATE_IMMINENT",
+      "Node": "UclampTALatency",
+      "Duration": 50,
+      "Value": "1"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "INTERACTION"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "DISPLAY_UPDATE_IMMINENT"
+    },
+    {
+      "PowerHint": "DISPLAY_IDLE",
+      "Type": "EndHint",
+      "Value": "DISPLAY_CHANGE"
+    },
+    {
+      "PowerHint": "DISPLAY_INACTIVE",
+      "Type": "EndHint",
+      "Value": "INTERACTION"
+    },
+    {
+      "PowerHint": "DISPLAY_INACTIVE",
+      "Type": "EndHint",
+      "Value": "DISPLAY_UPDATE_IMMINENT"
+    },
+    {
+      "PowerHint": "DISPLAY_CHANGE",
+      "Node": "UclampTAMin",
+      "Duration": 5000,
+      "Value": "65"
+    },
+    {
+      "PowerHint": "DISPLAY_CHANGE",
+      "Node": "UclampFgMin",
+      "Duration": 5000,
+      "Value": "25"
+    },
+    {
+      "PowerHint": "DISPLAY_CHANGE",
+      "Node": "UclampFgWinMin",
+      "Duration": 5000,
+      "Value": "25"
+    },
+    {
+      "PowerHint": "DISPLAY_CHANGE",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 5000,
+      "Value": "44"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "CPUBWGovernor",
+      "Duration": 3000,
+      "Value": "performance"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Type": "DoHint",
+      "Value": "LAUNCH"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "GPUMinFreq",
+      "Duration": 3000,
+      "Value": "465000000"
+    },
+    {
+      "PowerHint": "GAME_LOADING",
+      "Node": "PMQoSCpuDmaLatency",
+      "Duration": 3000,
+      "Value": "44"
+    },
+    {
+      "PowerHint": "Flipendo",
+      "Node": "CPULittleClusterMaxFreq",
+      "Duration": 0,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "Flipendo",
+      "Node": "CPUBigClusterMaxFreq",
+      "Duration": 0,
+      "Value": "9999999"
+    },
+    {
+      "PowerHint": "LAUNCH",
+      "Node": "CPUBWMinFreq",
+      "Duration": 3000,
+      "Value": "6881"
+    }
+  ],
+  "AdpfConfig": [
+    {
+      "Name": "DEFAULT",
+      "PID_On": true,
+      "PID_Po": 2.0,
+      "PID_Pu": 1.0,
+      "PID_I": 0.0,
+      "PID_I_Init": 200,
+      "PID_I_High": 512,
+      "PID_I_Low": -30,
+      "PID_Do": 500.0,
+      "PID_Du": 0.0,
+      "UclampMin_On": true,
+      "UclampMin_Init": 185,
+      "UclampMin_High": 384,
+      "UclampMin_Low": 2,
+      "UclampMax_EfficientBase": 500,
+      "UclampMax_EfficientOffset": 200,
+      "UclampMin_LoadUp": 150,
+      "UclampMin_LoadReset": 150,
+      "SamplingWindow_P": 1,
+      "SamplingWindow_I": 0,
+      "SamplingWindow_D": 1,
+      "ReportingRateLimitNs": 166666660,
+      "TargetTimeFactor": 1.0,
+      "StaleTimeFactor": 15.0,
+      "GpuBoost": false,
+      "HeuristicBoost_On": true,
+      "HBoostModerateJankThreshold": 2,
+      "HBoostOffMaxAvgDurRatio": 4.0,
+      "HBoostSevereJankPidPu": 0.25,
+      "HBoostSevereJankThreshold": 8,
+      "HBoostUclampMinFloorRange": [
+        230,
+        410
+      ],
+      "HBoostUclampMinCeilingRange": [
+        480,
+        722
+      ],
+      "JankCheckTimeFactor": 1.2,
+      "LowFrameRateThreshold": 25,
+      "MaxRecordsNum": 300
+    },
+    {
+      "Name": "SYSTEM_UI_PROFILE",
+      "PID_On": true,
+      "PID_Po": 2.0,
+      "PID_Pu": 1.0,
+      "PID_I": 0.0,
+      "PID_I_Init": 200,
+      "PID_I_High": 512,
+      "PID_I_Low": -30,
+      "PID_Do": 500.0,
+      "PID_Du": 0.0,
+      "UclampMin_On": true,
+      "UclampMin_Init": 150,
+      "UclampMin_High": 300,
+      "UclampMin_Low": 2,
+      "UclampMax_EfficientBase": 500,
+      "UclampMax_EfficientOffset": 200,
+      "UclampMin_LoadUp": 100,
+      "UclampMin_LoadReset": 100,
+      "SamplingWindow_P": 1,
+      "SamplingWindow_I": 0,
+      "SamplingWindow_D": 1,
+      "ReportingRateLimitNs": 166666660,
+      "TargetTimeFactor": 1.0,
+      "StaleTimeFactor": 15.0,
+      "GpuBoost": false,
+      "HeuristicBoost_On": true,
+      "HBoostModerateJankThreshold": 2,
+      "HBoostOffMaxAvgDurRatio": 4.0,
+      "HBoostSevereJankPidPu": 0.25,
+      "HBoostSevereJankThreshold": 8,
+      "HBoostUclampMinFloorRange": [
+        230,
+        410
+      ],
+      "HBoostUclampMinCeilingRange": [
+        480,
+        722
+      ],
+      "JankCheckTimeFactor": 1.2,
+      "LowFrameRateThreshold": 25,
+      "MaxRecordsNum": 300
     }
   ]
 }
