@@ -53,6 +53,10 @@ PRODUCT_BOARD_PLATFORM := sdm660
 TARGET_BOARD_PLATFORM := sdm660
 TARGET_ENFORCES_QSSI := true
 
+# Build
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_SRC_DIR_RW_ALLOWLIST := $(abspath .repo)
+
 # Camera
 TARGET_TS_MAKEUP := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
@@ -154,10 +158,7 @@ BOARD_SUPER_PARTITION_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SYSTEM_DEVICE
 BOARD_XIAOMI_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304 )
 
 # Reserve Partition
-ifneq ($(WITH_GMS), true)
--include vendor/lineage/config/BoardConfigReservedSize.mk
-endif
-BOARD_VENDORIMAGE_PARTITION_RESERVED_SIZE := 100000000
+-include vendor/custom/config/BoardConfigReservedSize.mk
 
 # Platform
 BOARD_VENDOR_PLATFORM := xiaomi-sdm660
@@ -200,8 +201,8 @@ PROTOBUF_SUPPORTED := true
 ENABLE_VENDOR_RIL_SERVICE := true
 
 # SELinux
-include device/lineage/sepolicy/libion/sepolicy.mk
-include device/lineage/sepolicy/libperfmgr/sepolicy.mk
+include device/custom/sepolicy/libion/sepolicy.mk
+include device/custom/sepolicy/libperfmgr/sepolicy.mk
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
