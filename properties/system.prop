@@ -130,6 +130,17 @@ vendor.vidc.enc.disable.pq=false
 
 # Misc
 ro.vendor.qti.sys.fw.bservice_enable=true
+
+# Mist Flags
+ro.mist.display=1080 x 2340, 60 hz
+ro.mist.battery=4000mah
+ro.mist.soc=Snapdragon® 660
+ro.mist.camera=48MP + 5MP
+ro.mist.front=13MP
+ro.mist.platform=SDM660
+ro.mist.screen=6.3' IPS LCD
+ro.mist.device.name=Redmi Note 7/7s
+
 # Netflix
 ro.netflix.bsp_rev=Q660-13149-1
 
