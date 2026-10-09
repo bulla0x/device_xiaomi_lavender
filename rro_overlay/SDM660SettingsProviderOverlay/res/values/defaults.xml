@@ -4,9 +4,6 @@
      SPDX-License-Identifier: Apache-2.0
 -->
 <resources>
-    <!-- Comma-separated list of bluetooth, wifi, and cell. -->
-    <bool name="def_accelerometer_rotation">true</bool>
-
     <!-- Default screen brightness, from 0 to 255.  102 is 40%. -->
     <integer name="def_screen_brightness">78</integer>
     <bool name="def_screen_brightness_automatic_mode">true</bool>
