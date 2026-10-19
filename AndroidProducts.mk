@@ -5,4 +5,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/matrixx_lavender.mk
+    $(LOCAL_DIR)/alpha_lavender.mk

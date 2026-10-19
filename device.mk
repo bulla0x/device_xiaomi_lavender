@@ -16,6 +16,9 @@ $(call inherit-product, vendor/xiaomi/lavender/lavender-vendor.mk)
 # Dolby
 $(call inherit-product-if-exists, hardware/dolby/dolby.mk)
 
+# MIUI Camera
+$(call inherit-product-if-exists, vendor/xiaomi/miuicamera/config.mk)
+
 # Audio
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.1-impl \

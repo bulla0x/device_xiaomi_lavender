@@ -154,7 +154,7 @@ BOARD_SUPER_PARTITION_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SYSTEM_DEVICE
 BOARD_XIAOMI_DYNAMIC_PARTITIONS_SIZE := $(shell expr $(BOARD_SUPER_PARTITION_SIZE) - 4194304 )
 
 # Reserve Partition
--include vendor/matrixx/config/BoardConfigReservedSize.mk
+-include vendor/alpha/config/BoardConfigReservedSize.mk
 
 # Platform
 BOARD_VENDOR_PLATFORM := xiaomi-sdm660
