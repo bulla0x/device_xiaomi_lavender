@@ -104,6 +104,8 @@ persist.vendor.audio.spatializer.speaker_enabled=true
 
 # Camera
 vendor.camera.aux.packageblacklist=com.discord
+persist.camera.eis.enable=1
+persist.vendor.camera.eis.enable=1
 
 # Crypto
 ro.crypto.dm_default_key.options_format.version=2
