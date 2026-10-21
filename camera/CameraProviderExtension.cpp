@@ -47,9 +47,7 @@ bool supportsSetTorchModeExt() {
 }
 
 int32_t getTorchDefaultStrengthLevelExt() {
-    // Our default value is 75. This corresponds to 15%.
-    // As we have changed the maximum value, 59% now corresponds to 75.
-    return 59;
+    return 140;
 }
 
 int32_t getTorchMaxStrengthLevelExt() {
@@ -66,16 +64,17 @@ int32_t getTorchStrengthLevelExt() {
 }
 
 void setTorchStrengthLevelExt(int32_t torchStrength, bool enabled) {
+    int32_t brightness = enabled ? torchStrength : 0;
     set(TOGGLE_SWITCH, 0);
     for (auto& path : kTorchLedPaths) {
         auto node = path + "/" + TORCH_BRIGHTNESS;
-        set(node, torchStrength);
+        set(node, brightness);
     }
-    if (enabled)
+    if (enabled && torchStrength > 0)
         set(TOGGLE_SWITCH, 255);
 }
 
 void setTorchModeExt(bool enabled) {
     int32_t strength = getTorchDefaultStrengthLevelExt();
-    setTorchStrengthLevelExt(enabled ? strength : 0, enabled);
+    setTorchStrengthLevelExt(strength, enabled);
 }
